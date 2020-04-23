@@ -35,6 +35,7 @@ public class Player : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+        Vector3 pos = transform.position;
         print("Triggered: " + other.gameObject.name);
         print("State: " + state + ", Vsp: " + vsp);
         GameObject go = other.gameObject;
@@ -43,13 +44,38 @@ public class Player : MonoBehaviour {
             if (state == 1 && vsp < 0)
             {
                 state = 0;
-                Vector3 pos = transform.position;
-                while (pos.y <= other.transform.position.y)
-                    pos.y--;
-                transform.position = pos;
                 vsp = 0;
+                while (pos.y <= other.transform.position.y)
+                    pos.y++;
             }
         }
+        transform.position = pos;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Vector3 pos = transform.position;
+        if (other.tag == "Collision")
+        {
+            while (pos.y - 0.99 <= other.transform.position.y)
+            {
+                print("here");
+                pos.y += 1 * Time.deltaTime;
+                //double p = pos.y;
+                //pos.y = (float) System.Math.Round(p);
+            }
+        }
+        transform.position = pos;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        //Vector3 pos = transform.position;
+        if (other.tag == "Collision")
+        {
+            state = 1;
+        }
+        
     }
 
     // Update is called once per frame
