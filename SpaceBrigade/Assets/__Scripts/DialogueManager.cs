@@ -5,9 +5,14 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-
+    [Header("Set in Inspector")]
     public Text nameText;
     public Text dialogueText;
+    public GameObject sdButton;
+    public GameObject cButton;
+
+    [Header("Set Dynamically")]
+    public string name; 
 
     //public Animator animator;
 
@@ -17,15 +22,23 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string>();
+
+        sdButton.SetActive(true);
+        cButton.SetActive(false);
+        dialogueText.text = "";
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
         //animator.SetBool("IsOpen", true);
 
+        sdButton.SetActive(false);
+        cButton.SetActive(true);
+
         Debug.Log("nametext " + dialogue.name);
 
-        nameText.text = dialogue.name;
+        name = nameText.text;
+        nameText.text = "";
 
         sentences.Clear();
 
@@ -63,6 +76,11 @@ public class DialogueManager : MonoBehaviour
     {
         Debug.Log("Done.");
         //animator.SetBool("IsOpen", false);
+        dialogueText.text = "";
+        nameText.text = name;
+
+        sdButton.SetActive(true);
+        cButton.SetActive(false);
     }
 
 }
