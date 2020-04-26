@@ -83,7 +83,7 @@ public class DialogueManager : MonoBehaviour
         sdButton.SetActive(true);
         cButton.SetActive(false);
 
-        SceneManager.LoadScene("Split", LoadSceneMode.Single);
+        SceneManager.LoadScene("Combat", LoadSceneMode.Single);
     }
 
 }
