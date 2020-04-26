@@ -12,11 +12,11 @@ public class Player : MonoBehaviour {
     int state = 0;
 
     [Header("Set in Inspector")]
-    float maxHsp = 50;
-    float maxVsp = 50;
-    float walkSpeed = 10;
-    float jump = 25;
-    float grav = -1;
+    float maxHsp = 2000;
+    float maxVsp = 2000;
+    float walkSpeed = 400;
+    float jump = 1000;
+    float grav = -40;
 
     // Singleton time
     private void Awake()
