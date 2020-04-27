@@ -45,11 +45,11 @@ public class Player : MonoBehaviour {
             {
                 state = 0;
                 vsp = 0;
-                while (pos.y <= other.transform.position.y)
-                    pos.y++;
+                pos.y = other.transform.position.y + (other.transform.localScale.y / 2) + (transform.localScale.y / 2);
             }
+            transform.position = pos;
         }
-        transform.position = pos;
+        
     }
 
     private void OnTriggerStay(Collider other)
@@ -57,15 +57,18 @@ public class Player : MonoBehaviour {
         Vector3 pos = transform.position;
         if (other.tag == "Collision")
         {
-            while (pos.y - 0.99 <= other.transform.position.y)
+            pos.y = other.transform.position.y + (other.transform.localScale.y / 2) + (transform.localScale.y / 2);
+
+            /*while (pos.y - 39 <= other.transform.position.y)
             {
                 print("here");
-                pos.y += 1 * Time.deltaTime;
+                pos.y += 40 * Time.deltaTime;
                 //double p = pos.y;
                 //pos.y = (float) System.Math.Round(p);
-            }
+            }*/
+            transform.position = pos;
         }
-        transform.position = pos;
+        
     }
 
     private void OnTriggerExit(Collider other)
