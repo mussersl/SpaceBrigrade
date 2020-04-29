@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-public class BattleTurns
+[System.Serializable]
+public class BattleTurn
 {
     public string AttackerName;
+    public string Type;
     public GameObject Attacker;
     public GameObject Defender;
 

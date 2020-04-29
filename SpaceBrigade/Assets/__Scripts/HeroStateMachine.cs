@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class HeroStateMachine : MonoBehaviour
 {
     public HeroStats hero;
+    private BattleStateMachine BSM;
 
     public enum TurnState
     {
@@ -24,7 +25,8 @@ public class HeroStateMachine : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        BSM = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
+        currentState = TurnState.PREPARING;
     }
 
     // Update is called once per frame
@@ -36,7 +38,8 @@ public class HeroStateMachine : MonoBehaviour
                 FillProgressBar();
                 break;
             case (TurnState.ADDTOLIST):
-
+                BSM.HerosToManage.Add(this.gameObject);
+                currentState = TurnState.IDLE;
                 break;
             case (TurnState.IDLE):
 

@@ -7,6 +7,7 @@ TagManager:
   - Collision
   - Enemy
   - Hero
+  - BattleManager
   layers:
   - Default
   - TransparentFX
