@@ -12,4 +12,14 @@ public class HeroStats {
     public int intellect;
     public int dexterity;
     public int constitution;
+
+    public void Damage(float damage)
+    {
+        currentHP -= (damage * Mathf.Pow(0.95f,constitution));
+    }
+
+    public float getAttack()
+    {
+        return strength;
+    }
 }

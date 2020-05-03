@@ -36,6 +36,10 @@ public class EnemyStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(enemy.currentHP <= 0)
+        {
+            currentState = TurnState.DEAD;
+        }
         switch (currentState)
         {
             case (TurnState.PREPARING):
@@ -94,7 +98,7 @@ public class EnemyStateMachine : MonoBehaviour
         //wait
         yield return new WaitForSeconds(0.5f);
         //do damage
-
+        heroToAttack.GetComponent<HeroStateMachine>().hero.Damage(enemy.curATK);
 
         //animate back to start
         while (MoveTo(startposition))

@@ -18,4 +18,12 @@ public class BaseEnemy
 
     public float baseATK;
     public float curATK;
+
+    public float baseDEF;
+    public float curDEF;
+
+    public void Damage(float damage)
+    {
+        currentHP -= (damage - curDEF);
+    }
 }

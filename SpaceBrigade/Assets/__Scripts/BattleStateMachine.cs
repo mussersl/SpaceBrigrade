@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BattleStateMachine : MonoBehaviour
 {
@@ -33,19 +34,52 @@ public class BattleStateMachine : MonoBehaviour
     public GameObject enemyButton;
     public Transform enemyButtonSpacer;
 
+    public GameObject attackPanel;
+    public GameObject enemySelectPanel;
+    public bool endCombatCheck;
+
     // Use this for initialization
     void Start()
     {
         battleState = PerformAction.WAIT;
         Enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
         Heros.AddRange(GameObject.FindGameObjectsWithTag("Hero"));
+        HeroInput = HeroGUI.ACTIVATE;
+
+        attackPanel.SetActive(false);
+        enemySelectPanel.SetActive(false);
+
         EnemyButtons();
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch(battleState)
+        endCombatCheck = true;
+        foreach (GameObject enemy in Enemies)
+        {
+            if(enemy.GetComponent<EnemyStateMachine>().currentState != EnemyStateMachine.TurnState.DEAD)
+            {
+                endCombatCheck = false;
+            }
+        }
+        if (endCombatCheck)
+        {
+            endCombatWin();
+        }
+        endCombatCheck = true;
+        foreach(GameObject hero in Heros)
+        {
+            if (hero.GetComponent<HeroStateMachine>().currentState != HeroStateMachine.TurnState.DEAD)
+            {
+                endCombatCheck = false;
+            }
+        }
+        if (endCombatCheck)
+        {
+            endCombatLoss();
+        }
+        switch (battleState)
         {
             case (PerformAction.WAIT):
                 if(PerformList.Count > 0)
@@ -64,13 +98,33 @@ public class BattleStateMachine : MonoBehaviour
                 }
                 else if(PerformList[0].Type == "Hero")
                 {
-
+                    HeroStateMachine HSM = performer.GetComponent<HeroStateMachine>();
+                    HSM.enemyToAttack = PerformList[0].Defender;
+                    HSM.currentState = HeroStateMachine.TurnState.ACTION;
+                    battleState = PerformAction.PERFORMACTION;
                 }
                 break;
             case (PerformAction.PERFORMACTION):
 
                 break;
+        }
+        switch(HeroInput)
+        {
+            case (HeroGUI.ACTIVATE):
+                if(HerosToManage.Count > 0)
+                {
+                    HerosToManage[0].transform.Find("Selector").gameObject.SetActive(true);
+                    HeroTurn = new BattleTurn();
 
+                    attackPanel.SetActive(true);
+                    HeroInput = HeroGUI.WAITING;
+                }
+                break;
+            case (HeroGUI.WAITING):
+                break;
+            case (HeroGUI.DONE):
+                HeroInputDone();
+                break;
         }
     }
 
@@ -95,5 +149,39 @@ public class BattleStateMachine : MonoBehaviour
 
             newButton.transform.SetParent(enemyButtonSpacer,false);
         }
+    }
+
+    public void attackSelect()
+    {
+        HeroTurn.AttackerName = HerosToManage[0].name;
+        HeroTurn.Attacker = HerosToManage[0];
+        HeroTurn.Type = "Hero";
+
+        attackPanel.SetActive(false);
+        enemySelectPanel.SetActive(true);
+    }
+
+    public void enemySelector(GameObject choosenEnemy)
+    {
+        HeroTurn.Defender = choosenEnemy;
+        HeroInput = HeroGUI.DONE;
+    }
+
+    void HeroInputDone()
+    {
+        PerformList.Add(HeroTurn);
+        enemySelectPanel.SetActive(false);
+        HerosToManage[0].transform.Find("Selector").gameObject.SetActive(false);
+        HerosToManage.RemoveAt(0);
+        HeroInput = HeroGUI.ACTIVATE;
+    }
+
+    public void endCombatWin()
+    {
+        SceneManager.LoadScene("Split", LoadSceneMode.Single);
+    }
+    public void endCombatLoss()
+    {
+        SceneManager.LoadScene("Split", LoadSceneMode.Single);
     }
 }
