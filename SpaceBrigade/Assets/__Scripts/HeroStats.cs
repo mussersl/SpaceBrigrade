@@ -13,9 +13,16 @@ public class HeroStats {
     public int dexterity;
     public int constitution;
 
+    public bool defending = false;
+
     public void Damage(float damage)
     {
-        currentHP -= (damage * Mathf.Pow(0.95f,constitution));
+        float defenseMult = Mathf.Pow(0.95f, constitution);
+        currentHP -= (damage * defenseMult);
+        if (defending)
+        {
+            currentHP += 0.5f * (damage * defenseMult);
+        }
     }
 
     public float getAttack()

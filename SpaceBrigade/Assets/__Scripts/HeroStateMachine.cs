@@ -14,7 +14,8 @@ public class HeroStateMachine : MonoBehaviour
         ADDTOLIST,
         IDLE,
         ACTION,
-        DEAD
+        DEAD,
+        DEFENDING
     }
 
     public TurnState currentState;
@@ -70,6 +71,11 @@ public class HeroStateMachine : MonoBehaviour
             case (TurnState.DEAD):
 
                 break;
+            case (TurnState.DEFENDING):
+                hero.defending = true;
+                resetCooldown();
+                currentState = TurnState.PREPARING;
+                break;
         }
     }
 
@@ -94,6 +100,7 @@ public class HeroStateMachine : MonoBehaviour
             yield break;
         }
         actionStarted = true;
+        hero.defending = false;
         //animate hero
         Vector3 enemyPosition = new Vector3(enemyToAttack.transform.position.x - 200f,
                                            enemyToAttack.transform.position.y,

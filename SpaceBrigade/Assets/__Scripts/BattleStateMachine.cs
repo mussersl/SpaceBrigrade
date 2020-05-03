@@ -160,6 +160,13 @@ public class BattleStateMachine : MonoBehaviour
         attackPanel.SetActive(false);
         enemySelectPanel.SetActive(true);
     }
+    public void defendSelect()
+    {
+        HerosToManage[0].GetComponent<HeroStateMachine>().currentState = HeroStateMachine.TurnState.DEFENDING;
+        HerosToManage.RemoveAt(0);
+        attackPanel.SetActive(false);
+        HeroInput = HeroGUI.ACTIVATE;
+    }
 
     public void enemySelector(GameObject choosenEnemy)
     {
