@@ -18,10 +18,13 @@ public class HeroStats {
     public void Damage(float damage)
     {
         float defenseMult = Mathf.Pow(0.95f, constitution);
-        currentHP -= (damage * defenseMult);
         if (defending)
         {
-            currentHP += 0.5f * (damage * defenseMult);
+            currentHP -= 0.5f * (damage * defenseMult);
+        }
+        else
+        {
+            currentHP -= (damage * defenseMult);
         }
     }
 
