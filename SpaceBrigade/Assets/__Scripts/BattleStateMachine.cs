@@ -105,7 +105,25 @@ public class BattleStateMachine : MonoBehaviour
                 }
                 break;
             case (PerformAction.PERFORMACTION):
-
+                GameObject person = GameObject.Find(PerformList[0].AttackerName);
+                if (PerformList[0].Type == "Enemy")
+                {
+                    EnemyStateMachine ESM = person.GetComponent<EnemyStateMachine>();
+                    if(ESM.currentState == EnemyStateMachine.TurnState.DEAD)
+                    {
+                        PerformList.RemoveAt(0);
+                        battleState = PerformAction.WAIT;
+                    }
+                }
+                else if (PerformList[0].Type == "Hero")
+                {
+                    HeroStateMachine HSM = person.GetComponent<HeroStateMachine>();
+                    if (HSM.currentState == HeroStateMachine.TurnState.DEAD)
+                    {
+                        PerformList.RemoveAt(0);
+                        battleState = PerformAction.WAIT;
+                    }
+                }
                 break;
         }
         switch(HeroInput)
