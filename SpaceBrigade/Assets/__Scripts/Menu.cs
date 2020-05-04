@@ -7,6 +7,7 @@ public class Menu : MonoBehaviour {
 
     public void Exit()
     {
+        Debug.Log("Exitting");
         Application.Quit();
     }
 }

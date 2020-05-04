@@ -5,10 +5,11 @@ using UnityEngine;
 public class Player : MonoBehaviour {
     //states: 0 = ground, 1 = air, 2 = interaction, 3 = menu
     static public Player S;
+    private Vector3 startPosition;
 
     [Header("Set Dynamically")]
     float hsp = 0;
-    float vsp = 0;
+    float vsp = -1;
     int state = 0;
 
     [Header("Set in Inspector")]
@@ -30,8 +31,8 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
+        startPosition = S.transform.position;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -85,7 +86,7 @@ public class Player : MonoBehaviour {
     void Update () {
         if(this.transform.position.y < 0)
         {
-            this.transform.position = new Vector3(513, 269, 0);
+            this.transform.position = startPosition;
         }
         float xAxis = Input.GetAxis("Horizontal");
         hsp = walkSpeed * xAxis;
@@ -101,6 +102,14 @@ public class Player : MonoBehaviour {
         {
             vsp += jump;
             state = 1;
+        }
+        if(hsp < 0)
+        {
+            this.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        if (hsp > 0)
+        {
+            this.GetComponent<SpriteRenderer>().flipX = false;
         }
         Vector3 pos = transform.position;
         pos.x += hsp * Time.deltaTime;

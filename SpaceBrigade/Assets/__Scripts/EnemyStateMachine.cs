@@ -56,7 +56,7 @@ public class EnemyStateMachine : MonoBehaviour
                 StartCoroutine(TimeForAction());
                 break;
             case (TurnState.DEAD):
-
+                this.GetComponent<SpriteRenderer>().gameObject.SetActive(false);
                 break;
         }
     }
