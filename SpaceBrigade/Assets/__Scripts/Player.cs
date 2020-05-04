@@ -83,6 +83,10 @@ public class Player : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        if(this.transform.position.y < 0)
+        {
+            this.transform.position = new Vector3(513, 269, 0);
+        }
         float xAxis = Input.GetAxis("Horizontal");
         hsp = walkSpeed * xAxis;
         if (state == 1)
