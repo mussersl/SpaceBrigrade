@@ -92,6 +92,12 @@ public class BattleStateMachine : MonoBehaviour
                 if(PerformList[0].Type == "Enemy")
                 {
                     EnemyStateMachine ESM = performer.GetComponent<EnemyStateMachine>();
+                    if (ESM.currentState == EnemyStateMachine.TurnState.DEAD)
+                    {
+                        PerformList.RemoveAt(0);
+                        battleState = PerformAction.WAIT;
+                        break;
+                    }
                     ESM.heroToAttack = PerformList[0].Defender;
                     ESM.currentState = EnemyStateMachine.TurnState.ACTION;
                     battleState = PerformAction.PERFORMACTION;
@@ -99,6 +105,11 @@ public class BattleStateMachine : MonoBehaviour
                 else if(PerformList[0].Type == "Hero")
                 {
                     HeroStateMachine HSM = performer.GetComponent<HeroStateMachine>();
+                    if (HSM.currentState == HeroStateMachine.TurnState.DEAD)
+                    {
+                        PerformList.RemoveAt(0);
+                        battleState = PerformAction.WAIT;
+                    }
                     HSM.enemyToAttack = PerformList[0].Defender;
                     HSM.currentState = HeroStateMachine.TurnState.ACTION;
                     battleState = PerformAction.PERFORMACTION;
