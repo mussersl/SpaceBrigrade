@@ -43,7 +43,10 @@ public class EnemyStateMachine : MonoBehaviour
         switch (currentState)
         {
             case (TurnState.PREPARING):
-                FillProgressBar();
+                if (!BSM.pause)
+                {
+                    FillProgressBar();
+                }
                 break;
             case (TurnState.CHOOSEACTION):
                 ChooseAction();

@@ -56,7 +56,10 @@ public class HeroStateMachine : MonoBehaviour
         switch (currentState)
         {
             case (TurnState.PREPARING):
-                FillProgressBar();
+                if (!BSM.pause)
+                {
+                    FillProgressBar();
+                }
                 break;
             case (TurnState.ADDTOLIST):
                 BSM.HerosToManage.Add(this.gameObject);
@@ -82,12 +85,17 @@ public class HeroStateMachine : MonoBehaviour
     void FillProgressBar()
     {
         cur_cooldown += Time.deltaTime;
+        SetProgressBar();
+    }
+
+    void SetProgressBar()
+    {
         float calc_cooldown = cur_cooldown / max_cooldown;
-        ProgressBar.transform.localScale = 
-            new Vector3(Mathf.Clamp(calc_cooldown,0,1)
-                ,ProgressBar.transform.localScale.y
-                ,ProgressBar.transform.localScale.z);
-        if(cur_cooldown >= max_cooldown)
+        ProgressBar.transform.localScale =
+            new Vector3(Mathf.Clamp(calc_cooldown, 0, 1)
+                , ProgressBar.transform.localScale.y
+                , ProgressBar.transform.localScale.z);
+        if (cur_cooldown >= max_cooldown)
         {
             currentState = TurnState.ADDTOLIST;
         }
@@ -128,6 +136,7 @@ public class HeroStateMachine : MonoBehaviour
         actionStarted = false;
         //reset enemy state
         resetCooldown();
+        SetProgressBar();
         currentState = TurnState.PREPARING;
     }
 

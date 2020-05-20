@@ -13,6 +13,7 @@ public class BattleStateMachine : MonoBehaviour
         PERFORMACTION
     }
     public PerformAction battleState;
+    public bool pause;
 
     public List<BattleTurn> PerformList = new List<BattleTurn>();
     public List<GameObject> Heros = new List<GameObject>();
@@ -42,6 +43,7 @@ public class BattleStateMachine : MonoBehaviour
     void Start()
     {
         battleState = PerformAction.WAIT;
+        pause = false;
         Enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
         Heros.AddRange(GameObject.FindGameObjectsWithTag("Hero"));
         HeroInput = HeroGUI.ACTIVATE;
@@ -148,8 +150,10 @@ public class BattleStateMachine : MonoBehaviour
         switch(HeroInput)
         {
             case (HeroGUI.ACTIVATE):
+                pause = false;
                 if(HerosToManage.Count > 0)
                 {
+                    pause = true;
                     HerosToManage[0].transform.Find("Selector").gameObject.SetActive(true);
                     HeroTurn = new BattleTurn();
 
