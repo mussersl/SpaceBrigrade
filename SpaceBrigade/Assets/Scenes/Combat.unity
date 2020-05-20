@@ -147,7 +147,7 @@ MonoBehaviour:
   Enemies: []
   HeroInput: 0
   HerosToManage: []
-  enemyButton: {fileID: 1313005896227190, guid: a2850bf6234d7a7418a80051fd9b2a7e,
+  enemyButton: {fileID: 1339629452889198, guid: a2850bf6234d7a7418a80051fd9b2a7e,
     type: 2}
   enemyButtonSpacer: {fileID: 1241528644}
   attackPanel: {fileID: 468299122}

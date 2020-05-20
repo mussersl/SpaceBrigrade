@@ -72,7 +72,7 @@ public class HeroStateMachine : MonoBehaviour
                 StartCoroutine(TimeForAction());
                 break;
             case (TurnState.DEAD):
-
+                this.GetComponent<SpriteRenderer>().gameObject.SetActive(false);
                 break;
             case (TurnState.DEFENDING):
                 hero.defending = true;
@@ -134,7 +134,7 @@ public class HeroStateMachine : MonoBehaviour
         BSM.battleState = BattleStateMachine.PerformAction.WAIT;
         //end coroutine
         actionStarted = false;
-        //reset enemy state
+        //reset hero state
         resetCooldown();
         SetProgressBar();
         currentState = TurnState.PREPARING;
