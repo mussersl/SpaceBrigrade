@@ -39,6 +39,8 @@ public class BattleStateMachine : MonoBehaviour
     public GameObject enemySelectPanel;
     public bool endCombatCheck;
 
+    public string nextScene;
+
     // Use this for initialization
     void Start()
     {
@@ -226,7 +228,7 @@ public class BattleStateMachine : MonoBehaviour
 
     public void endCombatWin()
     {
-        SceneManager.LoadScene("Split", LoadSceneMode.Single);
+        SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
     }
     public void endCombatLoss()
     {

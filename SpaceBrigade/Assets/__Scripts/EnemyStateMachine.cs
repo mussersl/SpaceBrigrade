@@ -18,13 +18,13 @@ public class EnemyStateMachine : MonoBehaviour
     public TurnState currentState;
     //for progress bar
     private float cur_cooldown = 0f;
-    private float max_cooldown = 5f;
+    private float max_cooldown = 2.5f;
 
     private Vector3 startposition;
     //For Handling Action
     private bool actionStarted = false;
     public GameObject heroToAttack;
-    private float animSpeed = 500f;
+    private float animSpeed = 1000f;
 
     void Start()
     {

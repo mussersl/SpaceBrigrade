@@ -21,14 +21,14 @@ public class HeroStateMachine : MonoBehaviour
     public TurnState currentState;
     //for prgress bar
     private float cur_cooldown = 0f;
-    private float max_cooldown = 5f;
+    private float max_cooldown = 2.5f;
     public Image ProgressBar;
 
     //animation
     public GameObject enemyToAttack;
     private bool actionStarted = false;
     private Vector3 startposition;
-    private float animSpeed = 500f;
+    private float animSpeed = 1000f;
 
     // Use this for initialization
     void Start()
@@ -76,6 +76,7 @@ public class HeroStateMachine : MonoBehaviour
                 break;
             case (TurnState.DEFENDING):
                 hero.defending = true;
+                this.transform.Find("Selector").gameObject.SetActive(false);
                 resetCooldown();
                 currentState = TurnState.PREPARING;
                 break;

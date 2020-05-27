@@ -11,4 +11,31 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Combat.unity
     guid: 072c7cbcba5822449ae665af4a7f8a2f
+  - enabled: 0
+    path: Assets/Scenes/Berburu.unity
+    guid: 5771f9dc60891e646a7fdda9762a1205
+  - enabled: 1
+    path: Assets/Scenes/Viridis.unity
+    guid: adda52678b88f2d4b86cde5c270b3a5e
+  - enabled: 1
+    path: Assets/Scenes/Gerogium Sidus.unity
+    guid: d5b4baf99a28d8443a4d52815ca3925e
+  - enabled: 1
+    path: Assets/Scenes/HighWay.unity
+    guid: 0126eabcec3d94849890249cbdef4dd3
+  - enabled: 1
+    path: Assets/Scenes/Combat2.unity
+    guid: 7cf05726b05b44041af051a707d9c769
+  - enabled: 1
+    path: Assets/Scenes/Space1.unity
+    guid: 4bea954aa0f20fc48be517f28e93c026
+  - enabled: 1
+    path: Assets/Scenes/Combat3.unity
+    guid: b3760a46d3ac9dd45bfe892e2940f5b0
+  - enabled: 1
+    path: Assets/Scenes/Combat4.unity
+    guid: 49d5f4a9aee85ac46b0ca43d472dbb45
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: e4ab21fb1887b664f991843ef286742e
   m_configObjects: {}

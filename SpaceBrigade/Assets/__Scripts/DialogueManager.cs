@@ -11,6 +11,7 @@ public class DialogueManager : MonoBehaviour
     public Text dialogueText;
     public GameObject sdButton;
     public GameObject cButton;
+    public string nextScene;
 
     [Header("Set Dynamically")]
     public string name; 
@@ -83,7 +84,7 @@ public class DialogueManager : MonoBehaviour
         sdButton.SetActive(true);
         cButton.SetActive(false);
 
-        SceneManager.LoadScene("Combat", LoadSceneMode.Single);
+        SceneManager.LoadScene(nextScene, LoadSceneMode.Single);
     }
 
 }
